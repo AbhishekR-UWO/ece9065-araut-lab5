@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+
 // Routing module
 import { AuthRoutingModule } from './auth-routing.module';
 
@@ -11,8 +12,13 @@ import { UserRegisterComponent } from './user-register/user-register.component';
 // Admin auth component
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 
+// Http
+import { HttpClientModule } from '@angular/common/http';
 // Forms module
 import { FormsModule } from '@angular/forms';
+
+// API Services
+import { ApiServiceService } from './../../service/api-service.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +29,9 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    FormsModule
-  ]
+    FormsModule,
+    HttpClientModule
+  ],
+  providers: [ApiServiceService]
 })
 export class AuthModule { }

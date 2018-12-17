@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  url: 'https://ece9065-araut4-lab5-araut4.c9users.io:8080'
 };
 
 /*

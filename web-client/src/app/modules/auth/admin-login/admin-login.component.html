@@ -1,3 +1,9 @@
-<p>
-  admin-login works!
-</p>
+<!-- Material input -->
+<!-- Default input -->
+<label for="exampleForm2">Default input</label>
+<input type="text" id="exampleForm2" class="form-control" [(ngModel)]="admin_email">
+<!-- Default input -->
+<label for="exampleForm2">Default input</label>
+<input type="text" id="exampleForm2" class="form-control" [(ngModel)]="admin_password">
+<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+<button type="button" class="btn btn-primary" (click)="submitAdminLogin($event)"> Admin Login </button>

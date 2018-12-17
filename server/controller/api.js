@@ -1,25 +1,34 @@
 var jwt = require("jsonwebtoken");
 var User = require('../models/user');
-
+var Comment = require("../models/comment");
+var Item = require("../models/items");
+var Cart = require("../models/cart");
 var config = require("../config/dbConfig");
 var bcrypt = require("bcrypt-nodejs");
 
 
-// User register API
+// User register API;
 exports.register = (req, res) => {
     if (!req.body.email || !req.body.password) {
-    res.json({success: false, msg: 'Please pass username and password.'});
+    res.json({success: false, msg: 'Please enter valid email and/or password.'});
   } else {
+      
+    // create new user and store in db;
     let hash  =	bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10), null);
 
     var newUser = new User({
         email: req.body.email,
-        password: hash
+        password: hash,
+        fname: req.body.fname,
+        lname: req.body.lname,
+        gender: req.body.gender,
+        isAdmin: req.body.isAdmin,
+        isActive: req.body.isActive
     });
-    // save the user
+    // save the user;
     newUser.save(function(err) {
       if (err) {
-        return res.json({success: false, msg: 'Username already exists.'});
+        return res.json({success: false, msg: 'Email already exists.'});
       }
       res.json({success: true, msg: 'Successful created new user.'});
     });
@@ -27,8 +36,9 @@ exports.register = (req, res) => {
 }
 
 
-// User login API 
+// User login API ;
 exports.login = (req, res) => {
+    console.log(req.body)
     User.findOne({email: req.body.email}, function(err, user) {
         if(err) {
             console.log(err);
