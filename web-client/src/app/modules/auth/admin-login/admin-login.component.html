@@ -1,9 +1,37 @@
-<!-- Material input -->
-<!-- Default input -->
-<label for="exampleForm2">Default input</label>
-<input type="text" id="exampleForm2" class="form-control" [(ngModel)]="admin_email">
-<!-- Default input -->
-<label for="exampleForm2">Default input</label>
-<input type="text" id="exampleForm2" class="form-control" [(ngModel)]="admin_password">
-<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-<button type="button" class="btn btn-primary" (click)="submitAdminLogin($event)"> Admin Login </button>
+
+<!-- Default form login -->
+<form class="text-center border border-light p-5">
+
+    <p class="h4 mb-4"> Admin Login</p>
+    
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Email -->
+    <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" required placeholder="E-mail">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Password -->
+    <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm-4">
+    <!-- Sign in button -->
+    <button class="btn btn-info btn-block my-4" type="submit"> Login </button>
+    </div>
+    <div class="col-sm"></div>
+    </div>
+</form>
+<!-- Default form login -->

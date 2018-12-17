@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+// Bootstrap 
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
 
 // Routing module
 import { AuthRoutingModule } from './auth-routing.module';
@@ -30,7 +33,8 @@ import { ApiServiceService } from './../../service/api-service.service';
     CommonModule,
     AuthRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [ApiServiceService]
 })
