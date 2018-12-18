@@ -51,6 +51,17 @@ export class ApiServiceService {
   getAll() {
     return this._http.get(this.server + '/getAll', httpOptions)
   }
+  
+  createWishList(wishList: any) {
+    return this._http.post(this.server + '/create_wish_list', wishList, httpOptions)
+  }
+  
+  searchAllWish() {
+    return this._http.get(this.server + '/search_all_wish', httpOptions)
+  }
+  addItemsToWish(items: any) {
+    return this._http.post(this.server + '/add_to_wish', items, httpOptions)
+  }
 }
 
 

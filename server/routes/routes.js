@@ -17,4 +17,11 @@ module.exports = function(app, passport) {
     app.post('/delete_item', passport.authenticate('jwt', {session: false}), api.deleteItem);
     
     app.get('/getAll', api.getAll);
+    
+    app.post('/create_wish_list', passport.authenticate('jwt', {session: false}), api.createWishList);
+    
+    app.get('/search_all_wish', passport.authenticate('jwt', {session: false}), api.searchAllWish);
+    
+    //app.post('/add_to_wish', passport.authenticate('jwt', {session: false}), api.addToWish);
+    
 }

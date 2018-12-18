@@ -26,9 +26,9 @@ export class MainComponent implements OnInit {
   // add to wish list
   addtoWC(element) {
     console.log(element);
-    this.status.push(element);
+    this.status.wish_list.push(element);
     this.toastr.info('Select Wish List');
-    this.router.navigate(['/wish']);
+    this.router.navigate(['/home/wish']);
   }
   
   // add comment 

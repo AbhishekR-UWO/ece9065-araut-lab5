@@ -3,6 +3,7 @@ var User = require('../models/user');
 var Comment = require("../models/comment");
 var Item = require("../models/items");
 var Cart = require("../models/cart");
+var Wish = require("../models/wish");
 var config = require("../config/dbConfig");
 var bcrypt = require("bcrypt-nodejs");
 
@@ -158,4 +159,52 @@ exports.getAll = (req, res) => {
             res.json({success: true, msg: items})
         }
     });
+}
+
+exports.createWishList = (req, res) => {
+    let autho = req.headers.authorization;
+    autho = autho.split(' ');
+    let decoded = jwt.verify(autho[1], config.secret);
+  
+  Wish.findOne({'list_name': req.body.list_name, 'byUser': decoded.email}, (err, list) => {
+      if(err) {
+          console.log(err)
+      }
+      if(list) {
+          res.json({success: false, msg: 'List with this name already exists'});
+      }else {
+          const newWish = new Wish({
+              'list_name': req.body.list_name,
+              'byUser': decoded.email,
+              'list_desc': req.body.list_desc,
+              'isPrivate': req.body.isPrivate
+          });
+          
+          newWish.save((err) => {
+              if(err) {
+                  res.json({success: false, msg: 'Error while saving the wish list'})
+              }else {
+                  res.json({success: true, msg: ' Wish list Created'});
+              }
+          });
+      }
+  });
+}
+
+exports.searchAllWish = (req, res) => {
+    let autho = req.headers.authorization;
+   autho = autho.split(' ');
+   console.log(autho);
+  let decoded = jwt.verify(autho[1], config.secret);
+  
+  Wish.find({'byUser': decoded.email}, (err, items) => {
+      if(err) {
+          console.log(err)
+      }
+      if(items.length <= 0) {
+          res.json({success: false, msg: 'No Wish Lists for current user'})
+      }else {
+          res.json({success: true, msg: items});
+      }
+  });
 }

@@ -1,3 +1,88 @@
-<p>
-  wish works!
-</p>
+<button mdbBtn color="black" class="waves-light" type="button" (click)="test.toggle()" mdbWavesEffect>
+  Add New Wish List
+</button>
+
+<div class="" mdbCollapse #test="bs-collapse">
+    
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Wish Name -->
+    <input type="text" id="wishname" name="wishname" class="form-control mb-4" required placeholder="Wish List Name" [(ngModel)]="wish_list_name">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Wish Name -->
+    <input type="text" id="wishdesc" name="wishdesc" class="form-control mb-4" required placeholder="Wish List Description" [(ngModel)]="wish_list_desc">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Wish Type -->
+    <select class="browser-default custom-select" [(ngModel)]="list_type">
+     <option selected>Wish List Type</option>
+     <option value="private">Private</option>
+     <option value="public">Public</option>
+    </select>
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    <hr>
+    <button mdbBtn color="black" class="waves-light" type="button" (click)="createWishList($event)" mdbWavesEffect>
+  Create List 
+    </button>
+</div>
+
+
+<button mdbBtn color="black" class="waves-light" type="button" (click)="test1.toggle()" mdbWavesEffect>
+  Select Wish List
+</button>
+
+<div class="" mdbCollapse #test1="bs-collapse">
+    
+    
+   <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Email -->
+    </div>
+    <div class="col-sm"><button mdbBtn color="black" class="waves-light" type="button" (click)="searchAllWish($event)" mdbWavesEffect>
+  Search Wish List
+</button></div>
+    </div>
+    <br>
+    <table mdbTable>
+    <tr>
+      <td>
+          List Name
+      </td>
+      <td>
+          List Description
+      </td>
+      <td>
+          is Private
+      </td>
+      <td>
+          Action
+      </td>
+    </tr>
+    <tr mdbTableCol *ngFor="let element of wishLists">
+      <td>{{element.list_name}}</td>
+      <td>{{element.list_desc}}</td>
+      <td>{{element.isPrivate}}</td>
+      <td><button mdbBtn color="black" class="waves-light" type="button" (click)="selectWishList(element)" mdbWavesEffect>
+ Select
+</button></td>
+    </tr>
+</table>
+    
+    
+</div>

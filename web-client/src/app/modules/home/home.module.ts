@@ -18,9 +18,6 @@ import { CartComponent } from './cart/cart.component';
 
 
 import { FormsModule } from '@angular/forms';
-import { WishComponent } from './wish/wish.component';
-import { CartComponent } from './cart/cart.component';
-
 
 @NgModule({
   declarations: [MainComponent, BlurbComponent, AdminItemFunComponent, AdminMainFunComponent, WishComponent, CartComponent],

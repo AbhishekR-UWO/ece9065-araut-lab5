@@ -6,7 +6,8 @@ import { MainComponent } from './main/main.component';
 import { BlurbComponent } from './blurb/blurb.component';
 import { AdminItemFunComponent } from './admin-item-fun/admin-item-fun.component';
 import { AdminMainFunComponent } from './admin-main-fun/admin-main-fun.component';
-
+import { WishComponent } from './wish/wish.component';
+import { CartComponent } from './cart/cart.component';
 
 
 const routes: Routes = [
