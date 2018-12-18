@@ -25,6 +25,14 @@ const routes: Routes = [
   {
     path: 'admin/main_fun',
     component: AdminMainFunComponent
+  },
+  {
+    path: 'wish',
+    component: WishComponent
+  },
+  {
+    path: 'cart',
+    component: CartComponent
   }
   ];
 

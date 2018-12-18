@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 // Bootstrap 
@@ -6,7 +7,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 // HTTP, Forms, Toastr Modules
 import { HttpClientModule } from '@angular/common/http';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 
 // Layout module
@@ -22,6 +23,7 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     MDBBootstrapModule.forRoot(),
     ToastrModule.forRoot(),
@@ -29,7 +31,7 @@ import { AppComponent } from './app.component';
     LayoutModule,
     HttpClientModule
   ],
-  providers: [ToastrService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

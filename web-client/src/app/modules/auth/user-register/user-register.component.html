@@ -1,0 +1,70 @@
+<!-- Default form login -->
+<form class="text-center border border-light p-5">
+
+    <p class="h4 mb-4">User Registeration</p>
+    
+   
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Email -->
+    <input type="email" id="defaultLoginFormEmail" name="user_email" class="form-control mb-4" required placeholder="E-mail" [(ngModel)]="user_email">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- First Name -->
+    <input type="text" id="defaultLoginFname" name="user_fname" class="form-control mb-4" required placeholder="First Name" [(ngModel)]="user_fname">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Last Name -->
+    <input type="text" id="defaultLoginLname" name="user_lname" class="form-control mb-4" required placeholder="Last Name" [(ngModel)]="user_lname">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Country -->
+    <input type="text" id="defaultLoginCountry" name="user_country" class="form-control mb-4" required placeholder="Country" [(ngModel)]="user_country">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Password -->
+    <input type="password" id="defaultLoginFormPassword" name="user_password" class="form-control mb-4" placeholder="Password" [(ngModel)]="user_password">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Confirm Password -->
+    <input type="password" id="defaultLoginFormCPassword" name="user_cPassword" class="form-control mb-4" placeholder="Confirm Password" [(ngModel)]="user_cPassword">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm-4">
+    <!-- Sign in button -->
+    <button class="btn btn-info btn-block my-4 black" type="submit" (click)="userRegister($event)"> Login </button>
+    </div>
+    <div class="col-sm"></div>
+    </div>
+</form>
+<!-- Default form login -->

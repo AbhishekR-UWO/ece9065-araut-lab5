@@ -10,14 +10,11 @@ var UserSchema = mongoose.Schema({
     password: String,
     fname: String,
     lname: String,
-    gender: String,
+    country: String,
     isAdmin: Boolean,
     isActive: Boolean,
     
-    wish_list: {
-        private_list: Array,
-        public_list: Array
-    }
+    wish_list: Array
 });
 
 UserSchema.methods.generateHash = function(password)

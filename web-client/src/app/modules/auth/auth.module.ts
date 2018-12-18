@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 // Bootstrap 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-
+import { ToastrModule } from 'ngx-toastr';
 
 // Routing module
 import { AuthRoutingModule } from './auth-routing.module';
@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 
 // API Services
 import { ApiServiceService } from './../../service/api-service.service';
+import { StatusService } from './../../service/status.service'
 
 @NgModule({
   declarations: [
@@ -34,8 +35,9 @@ import { ApiServiceService } from './../../service/api-service.service';
     AuthRoutingModule,
     FormsModule,
     HttpClientModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    ToastrModule.forRoot(),
   ],
-  providers: [ApiServiceService]
+  providers: [ApiServiceService, StatusService]
 })
 export class AuthModule { }

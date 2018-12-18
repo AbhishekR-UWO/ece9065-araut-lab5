@@ -1,3 +1,198 @@
-<p>
-  admin-item-fun works!
-</p>
+<button mdbBtn color="black" class="waves-light" type="button" (click)="test.toggle()" mdbWavesEffect>
+  Add New Item
+</button>
+
+<div class="" mdbCollapse #test="bs-collapse">
+    
+    
+  <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item Name -->
+    <input type="text" id="defaultAddItemName" name="add_item_name" class="form-control mb-4" required placeholder="Item Name" [(ngModel)]="add_item_name">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item Price -->
+    <input type="number" id="defaultAddItemPrice" name="add_item_price" class="form-control mb-4" required placeholder="Item Price" [(ngModel)]="add_item_price">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item Tax -->
+    <input type="number" id="defaultAddItemTax" name="add_item_tax" class="form-control mb-4" required placeholder="Item Tax in (%) " [(ngModel)]="add_item_tax">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item Avail -->
+    <input type="number" id="defaultAddItemAvail" name="add_item_avail" class="form-control mb-4" required placeholder="Item's Available Quantity" [(ngModel)]="add_item_avail">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item desc -->
+    <input type="text" id="defaultAddItemDesc" name="add_item_desc" class="form-control mb-4" required placeholder="Item's Description" [(ngModel)]="add_item_desc">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item desc -->
+    <button mdbBtn color="black" class="waves-light" type="button" (click)="saveNewItem($event)" mdbWavesEffect> Save </button>
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+</div>
+
+<button mdbBtn color="black" class="waves-light" type="button" (click)="test1.toggle()" mdbWavesEffect>
+  Update Existing Item
+</button>
+
+<div class="" mdbCollapse #test1="bs-collapse">
+    
+    
+  <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Email -->
+    <input type="text" id="searchItemForUpdate" name="search_to_update" class="form-control mb-4" required placeholder="Enter Game to Update" [(ngModel)]="search_game">
+    </div>
+    <div class="col-sm"><button mdbBtn color="black" class="waves-light" type="button" (click)="searchGame($event)" mdbWavesEffect>
+  Search
+</button></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item desc -->
+    <input type="text" id="searchedItemName" name="searched_item_name" class="form-control mb-4" required placeholder="Item Name" [(ngModel)]="searchedItem.item_name">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item desc -->
+    <input type="number" id="searchedItemPrice" name="searched_price" class="form-control mb-4" required placeholder="Item Price" [(ngModel)]="searchedItem.price">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item desc -->
+    <input type="number" id="searchedItemTax" name="searched_tax" class="form-control mb-4" required placeholder="Item Tax" [(ngModel)]="searchedItem.tax">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item desc -->
+    <input type="number" id="searchedItemAvail" name="searched_avail" class="form-control mb-4" required placeholder="Item Price" [(ngModel)]="searchedItem.avail">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item desc -->
+    <input type="text" id="searchedItemDesc" name="searched_desc" class="form-control mb-4" required placeholder="Item Desc" [(ngModel)]="searchedItem.desc">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    <button mdbBtn color="black" class="waves-light" type="button" (click)="updateItem($event)" mdbWavesEffect>
+  Update
+</button>
+    
+</div>
+
+<button mdbBtn color="black" class="waves-light" type="button" (click)="test2.toggle()" mdbWavesEffect>
+  Delete Existing Item
+</button>
+
+<div class="" mdbCollapse #test2="bs-collapse">
+    
+    
+  <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Email -->
+    <input type="text" id="delsearchItemForUpdate" name="delsearch_to_update" class="form-control mb-4" required placeholder="Enter Game to Update" [(ngModel)]="del_search">
+    </div>
+    <div class="col-sm"><button mdbBtn color="black" class="waves-light" type="button" (click)="delGameSearch($event)" mdbWavesEffect>
+  Search Item to Delete
+</button></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item desc -->
+    <input type="text" id="delsearchedItemName" name="delsearched_item_name" class="form-control mb-4" required placeholder="Item Name" [(ngModel)]="delItem.item_name">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item desc -->
+    <input type="number" id="delsearchedItemPrice" name="delsearched_price" class="form-control mb-4" required placeholder="Item Price" [(ngModel)]="delItem.price">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item desc -->
+    <input type="number" id="delsearchedItemTax" name="delsearched_tax" class="form-control mb-4" required placeholder="Item Tax" [(ngModel)]="delItem.tax">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item desc -->
+    <input type="number" id="delsearchedItemAvail" name="delsearched_avail" class="form-control mb-4" required placeholder="Item Price" [(ngModel)]="delItem.avail">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item desc -->
+    <input type="text" id="delsearchedItemDesc" name="delsearched_desc" class="form-control mb-4" required placeholder="Item Desc" [(ngModel)]="delItem.desc">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    <button mdbBtn color="black" class="waves-light" type="button" (click)="deleteItem($event)" mdbWavesEffect>
+  Delete
+</button>
+    
+</div>

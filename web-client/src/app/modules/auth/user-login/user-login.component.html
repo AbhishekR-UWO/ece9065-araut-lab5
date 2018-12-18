@@ -1,3 +1,45 @@
-<p>
-  user-login works!
-</p>
+<!-- Default form login -->
+<form class="text-center border border-light p-5">
+
+    <p class="h4 mb-4"> Admin Login</p>
+    
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Email -->
+    <input type="email" id="defaultLoginFormEmail" name="user_login_email" class="form-control mb-4" required placeholder="E-mail" [(ngModel)]="user_login_email">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Password -->
+    <input type="password" id="defaultLoginFormPassword" name="user_login_password" class="form-control mb-4" placeholder="Password" [(ngModel)]="user_login_password">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm-4">
+    <!-- Sign in button -->
+    <button class="btn btn-info btn-block my-4 black" type="submit" (click)="userLogin($event)"> Login </button>
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+     <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm-4">
+    <!-- Go Home  -->
+    <button class="btn btn-info btn-block my-4 black" (click)="goHome($event)"> Go Back </button>
+    </div>
+    <div class="col-sm"></div>
+    </div>
+</form>
+<!-- Default form login -->

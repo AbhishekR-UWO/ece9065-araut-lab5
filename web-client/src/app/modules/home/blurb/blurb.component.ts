@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SafeStyle } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-blurb',
@@ -6,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./blurb.component.scss']
 })
 export class BlurbComponent implements OnInit {
-
+  
+  
   constructor() { }
 
   ngOnInit() {

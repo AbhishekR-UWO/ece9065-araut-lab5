@@ -9,6 +9,7 @@ var bcrypt = require("bcrypt-nodejs");
 
 // User register API;
 exports.register = (req, res) => {
+    console.log(req.body);
     if (!req.body.email || !req.body.password) {
     res.json({success: false, msg: 'Please enter valid email and/or password.'});
   } else {
@@ -21,9 +22,9 @@ exports.register = (req, res) => {
         password: hash,
         fname: req.body.fname,
         lname: req.body.lname,
-        gender: req.body.gender,
-        isAdmin: req.body.isAdmin,
-        isActive: req.body.isActive
+        country: req.body.country,
+        isAdmin: false,
+        isActive: true
     });
     // save the user;
     newUser.save(function(err) {
@@ -38,20 +39,123 @@ exports.register = (req, res) => {
 
 // User login API ;
 exports.login = (req, res) => {
-    console.log(req.body)
     User.findOne({email: req.body.email}, function(err, user) {
         if(err) {
             console.log(err);
         }
         if(!user) {
-            res.status(401).send({success: false, msg: 'Authentication failed. User not found.'});
-        }
-        if(!user.validatePassword(req.body.password)) {
-            res.status(401).send({success: false, msg: 'Authentication failed. Wrong password.'});
+            res.json({success: false, msg: 'Authentication failed. User not found.'});
+        }else if(user.isActive === false){
+            res.json({success: false, msg: 'Login is Blocked. Please contact store manager'});
+        }else if(!user.validatePassword(req.body.password)) {
+            res.json({success: false, msg: 'Authentication failed. Wrong password.'});
         }else {
             var token = jwt.sign(user.toJSON(), config.secret);
           // return the information including token as JSON
           res.json({success: true, token: 'Bearer ' + token});
         }
   });
+}
+
+exports.adminLogin = (req, res) => {
+    User.findOne({email: req.body.email}, function(err, user) {
+        if(err) {
+            console.log(err);
+        }
+        if(!user) {
+            res.json({success: false, msg: 'Authentication failed. User not found.'});
+        }else if(user.isActive === false || user.isAdmin === false){
+            res.json({success: false, msg: 'Login is Blocked. Please contact store manager'});
+        }else if(!user.validatePassword(req.body.password)) {
+            res.json({success: false, msg: 'Authentication failed. Wrong password.'});
+        }else {
+            var token = jwt.sign(user.toJSON(), config.secret);
+          // return the information including token as JSON
+          res.json({success: true, token: 'Bearer ' + token});
+        }
+  });
+}
+
+exports.addItem = (req, res) => {
+   let autho = req.headers.authorization;
+   autho = autho.split(' ');
+   console.log(autho);
+  let decoded = jwt.verify(autho[1], config.secret);
+  
+  Item.findOne({item_name: req.body.item_name}, (err, item) => {
+      if(err) {
+          console.log(err);
+      }
+      if(item) {
+          res.json({success: false, msg: 'Item Already Exists in Cart. Please use Update !!'});
+      }else {
+          let newItem = new Item({
+              item_name: req.body.item_name,
+              price: req.body.price,
+              tax: req.body.tax,
+              avail: req.body.avail,
+              desc: req.body.desc
+          });
+          
+          newItem.save((err) => {
+              if(err) {
+                  res.json({success: false, msg: 'Something went wrong. Please contact support !!'});
+              }else {
+                  res.json({success: true, msg: ' Item added to DB successfully !!'});
+              }
+          });
+      }
+  });
+}
+
+exports.search_game = (req, res) => {
+    Item.findOne({'item_name': req.body.search_game}, (err, item) => {
+        if(err) {
+            console.log(err)
+        }
+        if(!item) {
+            res.json({success: false, msg: 'No Item of this name present in DB. Please check the name or add new item'});
+        }else {
+            res.json({success: true, msg: item});
+        }
+    });
+}
+
+exports.updateItem = (req, res) => {
+   Item.updateOne({'id': req.body.id}, {$set: {'item_name': req.body.item_name, 'price': req.body.price, 'tax': req.body.tax, 'avail': req.body.avail, 'desc': req.body.desc}}, (err, item) => {
+       if(err) {
+           console.log(err)
+       }if(!item) {
+           res.json({success: false, msg: 'Item could not be updated !!'});
+       }else {
+           res.json({success: true, msg: 'Item updated Sucessfully !!!'});
+       }
+   } );
+}
+
+exports.deleteItem = (req, res) => {
+    Item.deleteOne({'id': req.body.id}, (err, result) => {
+        if(err) {
+            console.log(err);
+        }
+        if(!result) {
+            res.json({success: false, msg: 'Item could not be deleted. Please try again !!!'})
+        }
+        if(result) {
+            res.json({success: true, msg: ' Item Deleted successfully !!'});
+        }
+    })
+}
+
+exports.getAll = (req, res) => {
+    Item.find((err, items) => {
+        if(err) {
+            console.log(err)
+        }
+        if(items.length < 0) {
+            res.json({success: false, msg: 'No Items in the database'})
+        }else {
+            res.json({success: true, msg: items})
+        }
+    });
 }
