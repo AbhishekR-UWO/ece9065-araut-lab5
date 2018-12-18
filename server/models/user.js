@@ -13,8 +13,6 @@ var UserSchema = mongoose.Schema({
     country: String,
     isAdmin: Boolean,
     isActive: Boolean,
-    
-    wish_list: Array
 });
 
 UserSchema.methods.generateHash = function(password)

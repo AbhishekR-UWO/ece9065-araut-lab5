@@ -49,7 +49,7 @@ export class ApiServiceService {
   }
   
   getAll() {
-    return this._http.get(this.server + '/getAll', httpOptions)
+    return this._http.get(this.server + '/getAll')
   }
   
   createWishList(wishList: any) {

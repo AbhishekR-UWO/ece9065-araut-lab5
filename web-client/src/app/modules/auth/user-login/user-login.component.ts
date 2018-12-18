@@ -18,6 +18,9 @@ export class UserLoginComponent implements OnInit {
   constructor(private router: Router, private toastr: ToastrService, private apiServ: ApiServiceService) { }
   
   userLogin(e) {
+    if(!this.user_login_email || !this.user_login_password) {
+      this.toastr.error(' Please enter email and/or Password');
+    }else {
     let userLoginData = {
       email: this.user_login_email,
       password: this.user_login_password
@@ -35,7 +38,8 @@ export class UserLoginComponent implements OnInit {
         this.router.navigate(['/home/main']);
         
       }
-    })
+    });
+  }
   }
   
   goHome(e) {

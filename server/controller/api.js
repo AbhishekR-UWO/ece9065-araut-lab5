@@ -208,3 +208,27 @@ exports.searchAllWish = (req, res) => {
       }
   });
 }
+
+exports.addToWish = (req, res) => {
+     let autho = req.headers.authorization;
+   autho = autho.split(' ');
+  let decoded = jwt.verify(autho[1], config.secret);
+  
+  Wish.findOne({'byUser': decoded.email, 'list_name': req.body.list_name}, (err, list) => {
+      if(err) {
+          console.log(err)
+      }
+      if(!list) {
+          res.json({success: false, msg: 'No list found for this user'});
+      }else {
+          req.body.items.forEach((element) => {
+              list.list_items.push(element);
+          });
+          
+          list.save((err) => {
+              if(err) throw err;
+              res.json({success: true, msg: ' Item added to the list'});
+          });
+      }
+  });
+}

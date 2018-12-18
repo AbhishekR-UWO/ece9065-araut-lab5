@@ -20,6 +20,7 @@ export class AppHeaderComponent implements OnInit {
       this.toastr.error('Already Logged Out !!');
     }else {
     localStorage.clear();
+    this.status.wish_list = [];
     this.toastr.info(' Logout Successfull !');
     this.router.navigate(['/home']);
     }

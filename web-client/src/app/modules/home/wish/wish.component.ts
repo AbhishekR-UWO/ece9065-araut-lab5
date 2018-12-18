@@ -60,17 +60,18 @@ export class WishComponent implements OnInit {
     });
   }
   
-  selectWishList(element) {
+  selectWishList(el) {
     let itemAdd = [];
     this.status.wish_list.forEach((element) => {
       itemAdd.push(element);
-    });
     
+    });
     let items = {
-      items: itemAdd
+      items: itemAdd,
+      list_name: el.list_name
     };
     
-    
+    console.log(itemAdd);
     this.apiServ.addItemsToWish(items)
     .subscribe((data: any) => {
       if(data.success == false) {

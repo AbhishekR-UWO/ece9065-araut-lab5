@@ -22,6 +22,6 @@ module.exports = function(app, passport) {
     
     app.get('/search_all_wish', passport.authenticate('jwt', {session: false}), api.searchAllWish);
     
-    //app.post('/add_to_wish', passport.authenticate('jwt', {session: false}), api.addToWish);
+    app.post('/add_to_wish', passport.authenticate('jwt', {session: false}), api.addToWish);
     
 }

@@ -19,6 +19,9 @@ export class AdminLoginComponent implements OnInit {
   constructor(private apiServ: ApiServiceService, private router: Router, private toastr: ToastrService) { }
   
   submitAdminLogin(e) {
+    if(!this.admin_email || !this.admin_password) {
+      this.toastr.error('Please Enter email and/or password')
+    }else {
     let loginData = {
       email: this.admin_email,
       password: this.admin_password
@@ -36,6 +39,7 @@ export class AdminLoginComponent implements OnInit {
         this.toastr.error(data.msg);
       }
     });
+  }
   }
 
   ngOnInit() {
