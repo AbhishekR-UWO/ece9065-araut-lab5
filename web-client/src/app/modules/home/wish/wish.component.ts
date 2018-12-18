@@ -20,6 +20,9 @@ export class WishComponent implements OnInit {
   isPrivate;
   
   wishLists: any = [];
+  
+  search_list;
+  searchedItem: any = {};
   constructor(private router: Router, private apiServ: ApiServiceService, private status: StatusService, private toastr: ToastrService) { }
   
   // create List
@@ -48,6 +51,7 @@ export class WishComponent implements OnInit {
   
   
   searchAllWish(e) {
+    this.wishLists = [];
     this.apiServ.searchAllWish()
     .subscribe((data: any) => {
       if(data.success == false) {
@@ -60,22 +64,54 @@ export class WishComponent implements OnInit {
     });
   }
   
-  selectWishList(el) {
-    let itemAdd = [];
-    this.status.wish_list.forEach((element) => {
-      itemAdd.push(element);
+  InsertIntoWC(el) {
+    console.log(el);
+    let itemAdd = this.status.wish_list;
     
-    });
     let items = {
       items: itemAdd,
       list_name: el.list_name
     };
     
-    console.log(itemAdd);
+    console.log(items);
     this.apiServ.addItemsToWish(items)
     .subscribe((data: any) => {
       if(data.success == false) {
         this.toastr.error(data.msg)
+      }else {
+        this.toastr.success(data.msg);
+      }
+    });
+  }
+  
+  removeWC(el) {
+    this.apiServ.removeWC(el)
+    .subscribe((data: any) => {
+      if(data.success == false) {
+        this.toastr.error(data.msg)
+      }else {
+        this.toastr.success(data.msg);
+      }
+    });
+  }
+  
+  searchList(e) {
+    this.apiServ.searchList(this.search_list)
+    .subscribe((data: any) => {
+      if(data.msg == false) {
+        this.toastr.error(data.msg)
+      }else {
+        console.log(data.msg);
+        this.searchedItem = data.msg;
+      }
+    });
+  }
+  
+  updateList(e) {
+    this.apiServ.updateList(this.searchedItem)
+    .subscribe((data: any) => {
+      if(data.msg == false) {
+        this.toastr.error(data.msg);
       }else {
         this.toastr.success(data.msg);
       }

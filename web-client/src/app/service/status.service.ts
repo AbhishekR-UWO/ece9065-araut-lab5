@@ -5,6 +5,6 @@ import { Injectable, EventEmitter } from '@angular/core';
 })
 export class StatusService {
 
-  wish_list: any = [];
+  wish_list: any = {};
   constructor() { }
 }

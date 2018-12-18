@@ -1,3 +1,58 @@
-<p>
-  cart works!
-</p>
+<table mdbTable>
+  <thead>
+    <tr>
+      <th>
+          Item Name
+      </th>
+      <th>
+          Item Price
+      </th>
+      <th>
+          Item Tax
+      </th>
+      <th>
+          Buy Quantity
+      </th>
+      <th>
+          Check total price
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr mdbTableCol *ngFor="let element of cart">
+      <td>{{element.item_name}}</td>
+      <td>{{element.item_price}}</td>
+      <td>{{element.item_tax}}</td>
+      <td><input type="number" id="searchItemForUpdate" name="buy" class="form-control mb-4" min="{{1}}" max="{{element.item_avail}}" required placeholder="Enter amount of quantity to purchase" [(ngModel)]="element.buy">
+    </td>
+    <td>
+        <button mdbBtn color="black" class="waves-light" type="button" (click)="checkPrice(element, element.buy)" mdbWavesEffect>
+  Checkout
+</button>
+    </td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+
+<button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.show(); buyNow($event)" mdbWavesEffect>Launch demo modal</button>
+
+<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

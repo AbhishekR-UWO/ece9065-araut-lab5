@@ -62,6 +62,26 @@ export class ApiServiceService {
   addItemsToWish(items: any) {
     return this._http.post(this.server + '/add_to_wish', items, httpOptions)
   }
+  
+  removeWC(el: any) {
+    return this._http.post(this.server + '/delete_wish', el, httpOptions)
+  }
+  
+  searchList(search) {
+    return this._http.post(this.server + '/search_list', {list_name: search}, httpOptions)
+  }
+  
+  updateList(element: any) {
+    return this._http.post(this.server + '/update_list', element, httpOptions)
+  }
+  
+  addtoCart(element: any) {
+    return this._http.post(this.server + '/addtoCart', element, httpOptions)
+  }
+  
+  getCart() {
+    return this._http.get(this.server + '/getCart', httpOptions)
+  }
 }
 
 

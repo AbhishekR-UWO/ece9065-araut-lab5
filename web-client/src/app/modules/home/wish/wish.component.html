@@ -78,11 +78,71 @@
       <td>{{element.list_name}}</td>
       <td>{{element.list_desc}}</td>
       <td>{{element.isPrivate}}</td>
-      <td><button mdbBtn color="black" class="waves-light" type="button" (click)="selectWishList(element)" mdbWavesEffect>
+      <td><button mdbBtn color="black" class="waves-light" type="button" (click)="InsertIntoWC(element)" mdbWavesEffect>
  Insert into
+</button></td>
+<td><button mdbBtn color="black" class="waves-light" type="button" (click)="removeWC(element)" mdbWavesEffect>
+ Remove List
 </button></td>
     </tr>
 </table>
     
     
 </div>
+
+
+
+<button mdbBtn color="black" class="waves-light" type="button" (click)="test3.toggle()" mdbWavesEffect>
+  Update Existing List 
+</button>
+
+<div class="" mdbCollapse #test3="bs-collapse">
+    
+    
+  <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Email -->
+    <input type="text" id="updateListsearch" name="search_to_update" class="form-control mb-4" required placeholder="Enter List to Update" [(ngModel)]="search_list">
+    </div>
+    <div class="col-sm"><button mdbBtn color="black" class="waves-light" type="button" (click)="searchList($event)" mdbWavesEffect>
+  Search
+</button></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item desc -->
+    <input type="text" id="searchListName" name="searched_item_name" class="form-control mb-4" required placeholder="List Name" [(ngModel)]="searchedItem.list_name">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item desc -->
+    <input type="text" id="searchListDesc" name="searched_price" class="form-control mb-4" required placeholder="List Desc" [(ngModel)]="searchedItem.list_desc">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item desc -->
+    <select class="browser-default custom-select" [(ngModel)]="searchedItem.isPrivate">
+     <option selected>Wish List Type</option>
+     <option value=true>Private</option>
+     <option value=false>Public</option>
+    </select></div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <button mdbBtn color="black" class="waves-light" type="button" (click)="updateList($event)" mdbWavesEffect>
+  Update
+</button>
+    
+</div>
+

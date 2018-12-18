@@ -21,12 +21,21 @@ export class MainComponent implements OnInit {
   // add to cart
   addtoCart(element) {
     console.log(element);
+    this.apiServ.addtoCart(element)
+    .subscribe((data: any) => {
+      if(data.success == false) {
+        this.toastr.error(data.msg)
+      }else {
+        this.toastr.success(data.msg)
+      }
+    })
   }
   
   // add to wish list
   addtoWC(element) {
     console.log(element);
-    this.status.wish_list.push(element);
+    this.status.wish_list = {};
+    this.status.wish_list = element;
     this.toastr.info('Select Wish List');
     this.router.navigate(['/home/wish']);
   }
