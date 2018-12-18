@@ -194,7 +194,6 @@ exports.createWishList = (req, res) => {
 exports.searchAllWish = (req, res) => {
     let autho = req.headers.authorization;
    autho = autho.split(' ');
-   console.log(autho);
   let decoded = jwt.verify(autho[1], config.secret);
   
   Wish.find({'byUser': decoded.email}, (err, items) => {
@@ -220,15 +219,186 @@ exports.addToWish = (req, res) => {
       }
       if(!list) {
           res.json({success: false, msg: 'No list found for this user'});
-      }else {
-          req.body.items.forEach((element) => {
-              list.list_items.push(element);
-          });
+      }else if(list){
+          list.list_items.push(req.body.items);
           
           list.save((err) => {
-              if(err) throw err;
-              res.json({success: true, msg: ' Item added to the list'});
+              if(err) {
+                  throw err;
+        
+              }else {
+                  res.json({success: true, msg: 'item added to the Wish List'});
+              }
           });
       }
   });
+}
+
+exports.deleteWC = (req, res) => {
+    let autho = req.headers.authorization;
+   autho = autho.split(' ');
+  let decoded = jwt.verify(autho[1], config.secret);
+    Wish.remove({'list_name': req.body.list_name, 'byUser': decoded.email}, (err, list) => {
+        if(err) {
+            throw err;
+        }
+        if(!list){
+            res.json({success: false, msg: "Error while deleting the Wish List"})
+        }else {
+            res.json({success: true, msg: 'List deleted successfully'});
+        }
+    });
+}
+
+exports.searchList = (req, res) =>{
+    let autho = req.headers.authorization;
+   autho = autho.split(' ');
+  let decoded = jwt.verify(autho[1], config.secret);
+  
+  Wish.findOne({'list_name': req.body.list_name, 'byUser': decoded.email}, (err, item) => {
+      if(err) {
+          throw err;
+      }
+      if(!item) {
+          res.json({success: false, msg: 'No List with this name found'})
+      }else {
+          res.json({success: true, msg: item});
+      }
+  });
+}
+
+exports.updateList = (req, res) => {
+    if(req.body.isPrivate === 'true') {
+        req.body.isPrivate = true
+    }else if(req.body.isPrivate === 'false'){
+        req.body.isPrivate = false
+    }
+    
+    console.log(req.body);
+    Wish.update({'id': req.body.id, 'byUser': req.body.byUser}, {$set: {'list_name': req.body.list_name, 'list_desc': req.body.list_desc, 'isPrivate': req.body.isPrivate}}, (err, result) => {
+        if(err) {
+            throw err;
+        }
+        if(!result) {
+            res.json({success: false, msg: ' Error in List update'})
+        }else {
+            res.json({success: true, msg: 'List updated Successfully'});
+        }
+    });
+}
+
+exports.addtoCart = (req, res) => {
+    let autho = req.headers.authorization;
+   autho = autho.split(' ');
+  let decoded = jwt.verify(autho[1], config.secret);
+  
+  Cart.findOne({'forUser': decoded.email}, (err, item) => {
+      if(err) {
+          throw err;
+      }
+      if(!item) {
+          
+          let item_list = {
+              item_name: req.body.item_name,
+              item_avail: parseInt(req.body.avail),
+                  item_price: parseInt(req.body.price),
+                  item_tax: parseInt(req.body.tax),
+              buy: 1
+          };
+          
+          
+          let newCart = new Cart({
+              forUser: decoded.email,
+              item_list: item_list
+          });
+          
+          newCart.save((err) => {
+              if(err){
+                  throw err;
+              }else {
+              Item.findOne({"item_name": req.body.item_name}, (err, result) => {
+                  if(err) throw err;
+                  
+                  if(!result) {
+                      console.log('No item of this name')
+                  }else {
+                      result.avail -= 1;
+                      
+                      result.save((err) => {
+                          if(err) throw err;
+                          res.json({success: true, msg: 'Added to Cart'});
+                      })
+                  }
+              });
+              }
+          });
+      }
+      if(item) {
+              let newItem = {
+                  item_name: req.body.item_name,
+                  item_avail: parseInt(req.body.avail),
+                  item_price: parseInt(req.body.price),
+                  item_tax: parseInt(req.body.tax),
+                  buy: 1
+              };
+              
+              item.item_list.push(newItem);
+              
+              item.save((err) => {
+                  if(err) {
+                      throw err;
+                  }else {
+                      res.json({success: true, msg: 'Added Successfully'});
+                  }
+              });
+              
+          }
+  });
+}
+
+exports.getCart = (req, res) => {
+     let autho = req.headers.authorization;
+   autho = autho.split(' ');
+  let decoded = jwt.verify(autho[1], config.secret);
+  
+  Cart.findOne({'forUser': decoded.email}, (err, item) => {
+      if(err) {
+          throw err;
+      }
+      if(!item) {
+          res.json({success: false, msg: 'No items added to cart'})
+      }else {
+          res.json({success: true, msg: item.item_list})
+      }
+  })
+}
+
+exports.getAllWishes = (req, res) => {
+    let autho = req.headers.authorization;
+   autho = autho.split(' ');
+  let decoded = jwt.verify(autho[1], config.secret);
+  
+  Wish.findOne({'byUser': decoded.email}, (err, item) => {
+      if(err) {
+          throw err;
+      }
+      if(!item) {
+          res.json({success: false, msg: 'No Wish list for this user '});
+      }else {
+          res.json({success: true, msg: item.list_items});
+      }
+  });
+}
+
+exports.getPublic = (req, res) => {
+    Wish.find({'isPrivate': false}, (err, items) => {
+        if(err) {
+            throw err;
+        }
+        if(!items) {
+            res.json({success: false, msg: 'No Public wish lists available'});
+        }else {
+            res.json({success: true, msg: items});
+        }
+    });
 }
