@@ -9,6 +9,14 @@ const httpOptions = {
     })
   };
   
+const httpOptions1 = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': localStorage.getItem('jwt')
+  })
+};
+
+  
   
 @Injectable({
   providedIn: 'root'
@@ -81,6 +89,24 @@ export class ApiServiceService {
   
   getCart() {
     return this._http.get(this.server + '/getCart', httpOptions)
+  }
+  
+  getAllWishes() {
+    return this._http.get(this.server + '/getAllWishes', httpOptions)
+  }
+  
+  getPublic() {
+    return this._http.get(this.server + '/getPublic', httpOptions)
+  }
+  
+  postComment(itemComm: any) {
+    //console.log(itemComm)
+    return this._http.post(this.server + '/addComment', itemComm, httpOptions)
+  }
+  
+  showComments(element: any) {
+    //console.log(element);
+    return this._http.post(this.server + '/showComments', {item: element})
   }
 }
 

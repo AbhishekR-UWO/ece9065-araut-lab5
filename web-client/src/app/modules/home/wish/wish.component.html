@@ -36,7 +36,7 @@
     <div class="col-sm"></div>
     </div>
     <hr>
-    <button mdbBtn color="black" class="waves-light" type="button" (click)="createWishList($event)" mdbWavesEffect>
+    <button mdbBtn color="blue" class="waves-light" type="button" (click)="createWishList($event)" mdbWavesEffect>
   Create List 
     </button>
 </div>
@@ -54,7 +54,7 @@
     <div class="col-sm">
     <!-- Email -->
     </div>
-    <div class="col-sm"><button mdbBtn color="black" class="waves-light" type="button" (click)="searchAllWish($event)" mdbWavesEffect>
+    <div class="col-sm"><button mdbBtn color="blue" class="waves-light" type="button" (click)="searchAllWish($event)" mdbWavesEffect>
   Search Wish List
 </button></div>
     </div>
@@ -78,10 +78,10 @@
       <td>{{element.list_name}}</td>
       <td>{{element.list_desc}}</td>
       <td>{{element.isPrivate}}</td>
-      <td><button mdbBtn color="black" class="waves-light" type="button" (click)="InsertIntoWC(element)" mdbWavesEffect>
+      <td><button mdbBtn color="blue" class="waves-light" type="button" (click)="InsertIntoWC(element)" mdbWavesEffect>
  Insert into
 </button></td>
-<td><button mdbBtn color="black" class="waves-light" type="button" (click)="removeWC(element)" mdbWavesEffect>
+<td><button mdbBtn color="blue" class="waves-light" type="button" (click)="removeWC(element)" mdbWavesEffect>
  Remove List
 </button></td>
     </tr>
@@ -105,7 +105,7 @@
     <!-- Email -->
     <input type="text" id="updateListsearch" name="search_to_update" class="form-control mb-4" required placeholder="Enter List to Update" [(ngModel)]="search_list">
     </div>
-    <div class="col-sm"><button mdbBtn color="black" class="waves-light" type="button" (click)="searchList($event)" mdbWavesEffect>
+    <div class="col-sm"><button mdbBtn color="blue" class="waves-light" type="button" (click)="searchList($event)" mdbWavesEffect>
   Search
 </button></div>
     </div>
@@ -140,9 +140,91 @@
     <div class="col-sm"></div>
     </div>
     
-    <button mdbBtn color="black" class="waves-light" type="button" (click)="updateList($event)" mdbWavesEffect>
+    <button mdbBtn color="blue" class="waves-light" type="button" (click)="updateList($event)" mdbWavesEffect>
   Update
 </button>
     
 </div>
 
+
+<button mdbBtn color="black" class="waves-light" type="button" (click)="test5.toggle()" mdbWavesEffect>
+  Get Items List 
+</button>
+
+<div class="" mdbCollapse #test5="bs-collapse">
+    
+    
+   <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <input type="text" id="getAllWishes" name="gwtAllWishes" class="form-control mb-4" required placeholder="Enter Wish List Name to Search" [(ngModel)]="search_wishes">
+    </div>
+    <div class="col-sm"><button mdbBtn color="blue" class="waves-light" type="button" (click)="getAllWishesFun($event)" mdbWavesEffect>
+  Search Wish List
+</button></div>
+    </div>
+    <br>
+    <table mdbTable>
+    <tr>
+      <td>
+          Item Name
+      </td>
+      <td>
+          Item Price
+      </td>
+      <td>
+          Item Tax
+      </td>
+      <td>
+          Description
+      </td>
+    </tr>
+    <tr mdbTableCol *ngFor="let element of getAllWishesArr">
+      <td>{{element.item_name}}</td>
+      <td>{{element.price}}</td>
+      <td>{{element.tax}}</td>
+      <td>{{element.desc}}</td>
+    </tr>
+</table>
+    
+    
+</div>
+
+
+
+<button mdbBtn color="black" class="waves-light" type="button" (click)="test6.toggle()" mdbWavesEffect>
+  Show Public Wish Lists
+</button>
+
+<div class="" mdbCollapse #test6="bs-collapse">
+  
+ <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    </div>
+    <div class="col-sm"><button mdbBtn color="blue" class="waves-light" type="button" (click)="getPublic($event)" mdbWavesEffect>
+  Get Public
+</button></div>
+    </div>
+    <br>
+    <table mdbTable>
+    <tr>
+      <td>
+          List Name
+      </td>
+      <td>
+          List Description
+      </td>
+      <td>
+          List Owner
+      </td>
+    </tr>
+    <tr mdbTableCol *ngFor="let element of getPublicArr">
+      <td>{{element.list_name}}</td>
+      <td>{{element.list_desc}}</td>
+      <td>{{element.byUser}}</td>
+    </tr>
+</table>
+    
+    
+</div>

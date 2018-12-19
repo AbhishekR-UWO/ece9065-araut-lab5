@@ -16,7 +16,7 @@ import { StatusService } from '../../../service/status.service';
 export class CartComponent implements OnInit {
   
   cart:any = [];
-  gTotal;
+  gTotal = 0;
   constructor(private router: Router, private apiServ: ApiServiceService, private status: StatusService, private toastr: ToastrService) { }
   
   checkPrice(ele) {
@@ -24,6 +24,7 @@ export class CartComponent implements OnInit {
     this.toastr.info(ele.buy + ' quantity of ' + ele.item_name + ' will cost CAD '  + total +  ' including taxes');
     
     this.gTotal += total;
+    console.log(this.gTotal)
   }
   
   // buyNow(e) {

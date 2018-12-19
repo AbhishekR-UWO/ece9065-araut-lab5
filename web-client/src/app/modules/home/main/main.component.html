@@ -1,17 +1,18 @@
 <div style="padding: 20px; margin: 5px;">
     <ul>
-    <li *ngFor="let element of everything">
+    <li *ngFor="let element of everything; let i = index;">
         <div class="row">
     <div class="col-md-2"></div>
      <div class="col-md-8"><mdb-card>
-  <!--Card image-->
   <!--Card content-->
   <mdb-card-body>
-
+    
     <!--Title-->
-    <mdb-card-title>
-      <h4>{{ element.item_name }}</h4>
-    </mdb-card-title>
+    <button (click)="getAll($event)" class="btn btn-fix text-left">
+    <mdb-card-text>
+      <h2 style="color: white;">{{ element.item_name }}</h2>
+    </mdb-card-text>
+    </button>
 
     <!--Text-->
     <mdb-card-text> {{ element.desc }}
@@ -28,12 +29,29 @@
             {{comment.comment}}
         </li>
     </ul>
-
+    <div class="md-form">
+      <textarea type="text" id="form7" class="md-textarea md-textarea-auto form-control" mdbInputDirective [(ngModel)]="addComment"></textarea>
+      <label for="form7">Add Comment</label>
+    </div>
+    <label for="input-1" class="control-label">Rate This</label>
+    <input id="input-1" name="input-1" class="rating rating-loading" data-min="0" data-max="5" data-step="1" [(ngModel)]="addRating">
+    <button mdbBtn color="primary" mdbWavesEffect (click)="addCommentFun(element)">Add Comment</button>&nbsp; &nbsp; &nbsp;
     <button mdbBtn color="primary" mdbWavesEffect (click)="addtoCart(element)">Add to Cart</button>&nbsp; &nbsp; &nbsp;
     <button mdbBtn color="primary" mdbWavesEffect (click)="addtoWC(element)">Add to  Wish List</button>&nbsp; &nbsp; &nbsp;
-    <button mdbBtn color="primary" mdbWavesEffect (click)="addComment(element)">Add Comment</button>&nbsp; &nbsp; &nbsp;
-  </mdb-card-body>
+    <button mdbBtn color="primary" class="waves-light" type="button" (click)="test.toggle(); showComment(element);" mdbWavesEffect>
+          Show Comments
+        </button>
+        
+        <div class="" mdbCollapse #test="bs-collapse">
+          <ul class="list-group">
+              <li class="list-group-item" *ngFor="let comment of allComments">
+                  <strong>User: </strong> {{comment.byUser}} <br> <strong> Rating: </strong>{{comment.rating}}<br> <strong>Comment: </strong> {{comment.comment}}<hr>
+              </li>
+          </ul>
+        </div>
+</mdb-card-body>
 </mdb-card>
+
 <br>
 </div>
 <div class="col-md-2"></div>

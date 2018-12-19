@@ -14,15 +14,26 @@ import { StatusService } from '../../../service/status.service';
 })
 export class WishComponent implements OnInit {
   
+  // Add list
   wish_list_name;
   wish_list_desc;
   list_type;
   isPrivate;
   
+  // search lists
   wishLists: any = [];
   
+  // update list
   search_list;
   searchedItem: any = {};
+  
+  // get items from list
+  search_wishes;
+  getAllWishesArr = [];
+  
+  
+  // get all public
+  getPublicArr = [];
   constructor(private router: Router, private apiServ: ApiServiceService, private status: StatusService, private toastr: ToastrService) { }
   
   // create List
@@ -118,6 +129,35 @@ export class WishComponent implements OnInit {
     });
   }
   
+  getAllWishesFun(e) {
+    this.getAllWishesArr = [];
+    this.apiServ.getAllWishes()
+    .subscribe((data: any) => {
+      if(data.success == false) {
+        this.toastr.error(data.msg)
+      }else {
+        console.log(data.msg);
+        data.msg.forEach((element) => {
+          this.getAllWishesArr.push(element)
+        });
+      }
+    });
+  }
+  
+  getPublic(e) {
+    this.getPublicArr = [];
+    this.apiServ.getPublic()
+    .subscribe((data: any) => {
+      if(data.success == false) {
+        this.toastr.error(data.msg)
+      }else {
+        console.log(data.msg);
+        data.msg.forEach((element) => {
+          this.getPublicArr.push(element);
+        });
+      }
+    });
+  }
   
   ngOnInit() {
     if(!localStorage.getItem('jwt')) {
