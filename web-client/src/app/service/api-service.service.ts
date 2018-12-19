@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
-
 const httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -107,6 +106,22 @@ export class ApiServiceService {
   showComments(element: any) {
     //console.log(element);
     return this._http.post(this.server + '/showComments', {item: element})
+  }
+  
+  searchUser(element: any) {
+    return this._http.post(this.server + '/searchUser',  {user: element}, httpOptions)
+  }
+  
+  changeUser(element: any) {
+    return this._http.post(this.server + '/changeUser', element, httpOptions)
+  }
+  
+  searchCommentToHide(element: any) {
+    return this._http.post(this.server + '/commentSearch', element, httpOptions)
+  }
+  
+  changeComment(element: any) {
+    return this._http.post(this.server + '/changeComment', element, httpOptions)
   }
 }
 

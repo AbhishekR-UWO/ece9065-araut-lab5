@@ -40,6 +40,13 @@ module.exports = function(app, passport) {
     
     app.post('/addComment', passport.authenticate('jwt', {session: false}), api.addComment);
     
-    app.post('/showComments', passport.authenticate('jwt', {session: false}), api.showComments);
+    app.post('/showComments', api.showComments);
     
+    app.post('/searchUser', passport.authenticate('jwt', {session: false}), api.searchUser);
+    
+    app.post('/changeUser', passport.authenticate('jwt', {session: false}), api.changeUser);
+    
+    app.post('/commentSearch', passport.authenticate('jwt', {session: false}), api.commentSearch);
+    
+    app.post('/changeComment', passport.authenticate('jwt', {session: false}), api.changeComment);
 }

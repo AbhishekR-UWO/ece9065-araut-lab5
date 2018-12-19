@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'https://ece9065-araut4-lab5-araut4.c9users.io:8080'
+  server: 'https://ece9065-araut4-lab5-araut4.c9users.io:8080'
 };
 
 /*

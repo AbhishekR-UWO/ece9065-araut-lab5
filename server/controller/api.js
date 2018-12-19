@@ -444,10 +444,8 @@ exports.addComment = (req, res) => {
   })
 }
 
+
 exports.showComments = (req, res) => {
-    let autho = req.headers.authorization;
-  autho = autho.split(' ');
-  let decoded = jwt.verify(autho[1], config.secret);
   
   Comment.find({'forItem': req.body.item}).sort({rating: 'desc'}).exec((err, items) =>{
       if(err) {
@@ -456,7 +454,79 @@ exports.showComments = (req, res) => {
       if(!items) {
           res.json({success: false, msg: ' No Comments for this Item found'})
       }else {
-         res.json({success: true, msg: items[4]});
+          let arr = [];
+         items.forEach((element) => {
+             if(element.isActive == true) {
+                arr.push(element) 
+             }
+         });
+         
+         res.json({success: true, msg: arr});
       }
   });
+}
+
+exports.searchUser = (req, res) => {
+    User.findOne({'email': req.body.user}, (err, item) => {
+        if(err) {
+            throw err;
+        }
+        if(!item) {
+            res.json({success: false, msg: 'No User with this Email'})
+        }else {
+            res.json({success: true, msg: item});
+        }
+    });
+}
+
+exports.changeUser = (req, res) => {
+    if(req.body.isActive == 'false') {
+        req.body.isActive = false;
+    }else if(req.body.isActive == 'true'){
+        req.body.isActive = true;
+    }
+    
+ User.update({'email': req.body.email}, {$set: {isAdmin: req.body.isAdmin, isActive: req.body.isActive}}, (err, result) =>{
+     if(err) {
+         throw err;
+     }
+     if(!result) {
+         res.json({success: false, msg: 'Error while saving user credentials'})
+     }else {
+         res.json({success: true, msg: 'Successfully changed user status'})
+     }
+ });
+    
+}
+
+exports.commentSearch = (req, res) => {
+    Comment.find({'byUser': req.body.email, 'forItem': req.body.item}, (err, item) => {
+        if(err) {
+            throw err;
+        }
+        if(!item){
+            res.json({success: false, msg: 'No comments found for' + req.body.user + ' on '+ req.body.item+ ' item'})
+        }else {
+            res.json({success: true, msg: item});
+        }
+    });
+}
+
+exports.changeComment = (req, res) => {
+    
+    Comment.findOne({'id': req.body.id}, (err, item) =>{
+        if(err) {
+            throw err;
+        }
+        if(!item) {
+            res.json({success: false, msg: 'No Comment to hide'})
+        }else {
+            item.isActive = req.body.isActive;
+            
+            item.save((err) => {
+                if(err) throw err;
+                res.json({success: true, msg: 'Comment status changed'});
+            });
+        }
+    });
 }

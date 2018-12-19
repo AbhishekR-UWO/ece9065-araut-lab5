@@ -1,3 +1,92 @@
-<p>
-  admin-main-fun works!
-</p>
+<button mdbBtn color="black" class="waves-light" type="button" (click)="test.toggle()" mdbWavesEffect>
+  Deactivate / Activate User
+</button>
+
+<div class="" mdbCollapse #test="bs-collapse">
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Email -->
+    <input type="text" id="searchuser" name="searchuser" class="form-control mb-4" required placeholder="Enter User email to search" [(ngModel)]="search_user">
+    </div>
+    <div class="col-sm"><button mdbBtn color="black" class="waves-light" type="button" (click)="searchUser($event)" mdbWavesEffect>
+      Search
+    </button></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item Name -->
+    <input type="text" id="useremail" name="useremail" class="form-control mb-4" required placeholder="User Email" [(ngModel)]="searchedUser.email">
+    </div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item desc -->
+    <select class="browser-default custom-select" [(ngModel)]="searchedUser.isActive">
+     <option selected>User Status</option>
+     <option value=true>Is Active</option>
+     <option value=false>Is Blocked</option>
+    </select></div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item desc -->
+    <select class="browser-default custom-select" [(ngModel)]="searchedUser.isAdmin">
+     <option selected>User Admin Status</option>
+     <option value=true>Is Admin</option>
+     <option value=false>Is Regular User</option>
+    </select></div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <button mdbBtn color="black" class="waves-light" type="button" (click)="changeUser($event)" mdbWavesEffect>
+      Confirm
+    </button>
+</div>
+
+
+<button mdbBtn color="black" class="waves-light" type="button" (click)="test1.toggle()" mdbWavesEffect>
+  Deactivate / Activate Comment
+</button>
+
+<div class="" mdbCollapse #test1="bs-collapse">
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Email -->
+    <input type="text" id="searchcomment" name="searchcomment" class="form-control mb-4" required placeholder="Enter User email to search" [(ngModel)]="search_user_comment"><br>
+    <input type="text" id="searchcomment" name="searchcomment" class="form-control mb-4" required placeholder="Enter Item to search" [(ngModel)]="search_item_comment">
+    
+    </div>
+    <div class="col-sm"><button mdbBtn color="black" class="waves-light" type="button" (click)="searchUserComment($event)" mdbWavesEffect>
+      Search
+    </button></div>
+    </div>
+    
+    
+    <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+    <!-- Item desc -->
+    <select class="browser-default custom-select" [(ngModel)]="searchedComment.isActive">
+     <option selected>Comment Status</option>
+     <option value=true>Is Active</option>
+     <option value=false>Is Blocked</option>
+    </select></div>
+    <div class="col-sm"></div>
+    </div>
+    
+    <button mdbBtn color="black" class="waves-light" type="button" (click)="changeComment($event)" mdbWavesEffect>
+      Confirm
+    </button>
+</div>

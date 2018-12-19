@@ -67,6 +67,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
+            "host": "0.0.0.0",
+            "port": 8081,
             "browserTarget": "web-client:build"
           },
           "configurations": {
