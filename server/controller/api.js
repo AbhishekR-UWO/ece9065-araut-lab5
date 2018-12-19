@@ -402,3 +402,61 @@ exports.getPublic = (req, res) => {
         }
     });
 }
+
+
+exports.addComment = (req, res) => {
+     let autho = req.headers.authorization;
+  autho = autho.split(' ');
+  let decoded = jwt.verify(autho[1], config.secret);
+  
+  Comment.findOne({'byUser': decoded.email, 'forItem': req.body.item}, (err, item) => {
+      if(err) {
+          throw err;
+      }
+      if(item) {
+            item.comment = req.body.comment;
+            item.rating = req.body.rating;
+            
+            item.save((err) => {
+                if(err) {
+                    throw err;
+                }else {
+                    res.json({success: true, msg: ' Comment updated successfully'});
+                }
+            })
+      }else{
+          let newComment = new Comment({
+              forItem: req.body.item,
+              byUser: decoded.email,
+              comment: req.body.comment,
+              rating: req.body.rating,
+              isActive: true
+          });
+          
+          newComment.save((err) => {
+              if(err) {
+                  throw err;
+              }else {
+                  res.json({success: true, msg: 'Comment added successfully'});
+              }
+          })
+      }
+  })
+}
+
+exports.showComments = (req, res) => {
+    let autho = req.headers.authorization;
+  autho = autho.split(' ');
+  let decoded = jwt.verify(autho[1], config.secret);
+  
+  Comment.find({'forItem': req.body.item}).sort({rating: 'desc'}).exec((err, items) =>{
+      if(err) {
+          throw err;
+      }
+      if(!items) {
+          res.json({success: false, msg: ' No Comments for this Item found'})
+      }else {
+         res.json({success: true, msg: items[4]});
+      }
+  });
+}

@@ -38,4 +38,8 @@ module.exports = function(app, passport) {
     
     app.get('/getPublic', passport.authenticate('jwt', {session: false}), api.getPublic);
     
+    app.post('/addComment', passport.authenticate('jwt', {session: false}), api.addComment);
+    
+    app.post('/showComments', passport.authenticate('jwt', {session: false}), api.showComments);
+    
 }
